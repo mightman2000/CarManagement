@@ -1,9 +1,12 @@
 package com.university.project.controller;
 
+import com.university.project.dto.ResponseCarDTO;
+import com.university.project.dto.ResponseGarageDTO;
 import com.university.project.model.Car;
 import com.university.project.service.CarService;
 import com.university.project.service.CarServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,16 +25,15 @@ public class CarController {
         carService = theCarService;
     }
 
+    @GetMapping
+    public List<ResponseCarDTO> getAllCars() {
+        return carService.getAllCars();
+    }
+
     @GetMapping("/{id}")
     public Car getCarById(@PathVariable int id){
 
         return carService.findById(id);
-    }
-
-    @GetMapping("")
-    public List<Car> getAllCars(){
-
-        return carService.findAll();
     }
 
 }

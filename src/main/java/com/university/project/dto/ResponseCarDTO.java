@@ -1,28 +1,27 @@
-package com.university.project.model;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+package com.university.project.dto;
 
 import java.util.List;
 
-@Entity
-public class Car {
+public class ResponseCarDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String make;
     private String model;
     private int productionYear;
     private String licensePlate;
+    private List<ResponseGarageDTO> garages;
 
-   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "garage_id", nullable = false)
-   private Garage garage;
+    public ResponseCarDTO() {
+    }
 
-   @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
-   private List<Maintenance> maintenances;
+    public ResponseCarDTO(int id, String make, String model, int productionYear, String licensePlate, List<ResponseGarageDTO> garages) {
+        this.id = id;
+        this.make = make;
+        this.model = model;
+        this.productionYear = productionYear;
+        this.licensePlate = licensePlate;
+        this.garages = garages;
+    }
 
     public int getId() {
         return id;
@@ -64,11 +63,11 @@ public class Car {
         this.licensePlate = licensePlate;
     }
 
-    public Garage getGarage() {
-        return garage;
+    public List<ResponseGarageDTO> getGarages() {
+        return garages;
     }
 
-    public void setGarage(Garage garage) {
-        this.garage = garage;
+    public void setGarages(List<ResponseGarageDTO> garages) {
+        this.garages = garages;
     }
 }

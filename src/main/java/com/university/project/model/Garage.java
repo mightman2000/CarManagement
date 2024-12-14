@@ -22,6 +22,9 @@ public class Garage {
     @JsonManagedReference
     private List<Car> cars;
 
+    @OneToMany(mappedBy = "garage", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Maintenance> maintenances;
+
     public int getId() {
         return id;
     }

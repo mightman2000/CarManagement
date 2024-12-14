@@ -1,12 +1,13 @@
 package com.university.project.service;
 
+import com.university.project.dto.ResponseCarDTO;
 import com.university.project.model.Car;
 
 import java.util.List;
 
 public interface CarService {
 
-    List<Car> findAll();
+    public List<ResponseCarDTO> getAllCars();
 
     Car findById(int theId);
 

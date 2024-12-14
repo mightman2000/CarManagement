@@ -1,8 +1,10 @@
 package com.university.project.controller;
 
+import com.university.project.dto.ResponseGarageDTO;
 import com.university.project.model.Car;
 import com.university.project.model.Garage;
 import com.university.project.service.GarageService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +28,10 @@ public class GarageController {
         return garageService.findById(id);
     }
 
-    @GetMapping("")
-    public List<Garage> getAllGarages(){
-        return garageService.findAll();
+    @GetMapping
+    public ResponseEntity<List<ResponseGarageDTO>> getAllGarages() {
+        List<ResponseGarageDTO> garages = garageService.getAllGarages();
+        return ResponseEntity.ok(garages);
     }
 
 

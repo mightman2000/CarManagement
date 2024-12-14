@@ -1,5 +1,6 @@
 package com.university.project.service;
 
+import com.university.project.dto.ResponseGarageDTO;
 import com.university.project.model.Car;
 import com.university.project.model.Garage;
 import com.university.project.repository.GarageRepository;
@@ -8,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GarageServiceImpl implements GarageService{
 
+    @Autowired
     private GarageRepository garageRepository;
 
     @Autowired
@@ -19,9 +22,22 @@ public class GarageServiceImpl implements GarageService{
         garageRepository = theGarageRepository;
     }
 
-    @Override
-    public List<Garage> findAll() {
-        return garageRepository.findAll();
+
+    public List<ResponseGarageDTO> getAllGarages() {
+        List<Garage> garages = garageRepository.findAll();
+        return garages.stream()
+                .map(this::convertToDTO) // Map each Garage to ResponseGarageDTO
+                .collect(Collectors.toList());
+    }
+
+    private ResponseGarageDTO convertToDTO(Garage garage) {
+        return new ResponseGarageDTO(
+                garage.getId(),
+                garage.getName(),
+                garage.getLocation(),
+                garage.getCity(),
+                garage.getCapacity()
+        );
     }
 
     @Override
