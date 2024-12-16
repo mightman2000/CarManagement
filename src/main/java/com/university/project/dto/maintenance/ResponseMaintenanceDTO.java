@@ -1,7 +1,6 @@
-package com.university.project.dto;
+package com.university.project.dto.maintenance;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class ResponseMaintenanceDTO {
 
@@ -9,7 +8,7 @@ public class ResponseMaintenanceDTO {
     private int carId;
     private String carName;
     private String serviceType;
-    private LocalDate scheduleDate;
+    private String scheduleDate;
     private int garageId;
     private String garageName;
 
@@ -17,7 +16,7 @@ public class ResponseMaintenanceDTO {
     public ResponseMaintenanceDTO() {
     }
 
-    public ResponseMaintenanceDTO(int id, int carId, String carName, String serviceType, LocalDate scheduleDate, int garageId, String garageName) {
+    public ResponseMaintenanceDTO(int id, int carId, String carName, String serviceType, String scheduleDate, int garageId, String garageName) {
         this.id = id;
         this.carId = carId;
         this.carName = carName;
@@ -59,11 +58,11 @@ public class ResponseMaintenanceDTO {
         this.serviceType = serviceType;
     }
 
-    public LocalDate getScheduleDate() {
+    public String getScheduleDate() {
         return scheduleDate;
     }
 
-    public void setScheduleDate(LocalDate scheduleDate) {
+    public void setScheduleDate(String scheduleDate) {
         this.scheduleDate = scheduleDate;
     }
 

@@ -1,6 +1,6 @@
 package com.university.project.service;
 
-import com.university.project.dto.ResponseMaintenanceDTO;
+import com.university.project.dto.maintenance.ResponseMaintenanceDTO;
 
 import java.util.List;
 

@@ -24,6 +24,12 @@ public class Car {
    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
    private List<Maintenance> maintenances;
 
+    public Car() {
+    }
+
+    public Car(String make, String model, int productionYear, String licensePlate, List<Garage> garages) {
+    }
+
     public int getId() {
         return id;
     }

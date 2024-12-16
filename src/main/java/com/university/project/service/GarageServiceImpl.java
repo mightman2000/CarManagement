@@ -1,7 +1,6 @@
 package com.university.project.service;
 
-import com.university.project.dto.ResponseGarageDTO;
-import com.university.project.model.Car;
+import com.university.project.dto.garage.ResponseGarageDTO;
 import com.university.project.model.Garage;
 import com.university.project.repository.GarageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import java.util.stream.Collectors;
 @Service
 public class GarageServiceImpl implements GarageService{
 
-    @Autowired
     private GarageRepository garageRepository;
 
     @Autowired

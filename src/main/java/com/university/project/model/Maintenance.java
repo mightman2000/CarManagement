@@ -17,7 +17,7 @@ public class Maintenance {
 
     private String serviceType;
 
-    private LocalDate scheduledDate;
+    private String scheduledDate;
 
     private String garageName;
 
@@ -29,6 +29,7 @@ public class Maintenance {
     @ManyToOne
     @JoinColumn(name = "garage_id", nullable = false)
     private Garage garage;
+
 
 
     public int getId() {
@@ -55,11 +56,11 @@ public class Maintenance {
         this.serviceType = serviceType;
     }
 
-    public LocalDate getScheduledDate() {
+    public String getScheduledDate() {
         return scheduledDate;
     }
 
-    public void setScheduledDate(LocalDate scheduledDate) {
+    public void setScheduledDate(String scheduledDate) {
         this.scheduledDate = scheduledDate;
     }
 

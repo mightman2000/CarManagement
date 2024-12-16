@@ -25,6 +25,12 @@ public class Garage {
     @OneToMany(mappedBy = "garage", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Maintenance> maintenances;
 
+    public Garage() {
+    }
+
+    public Garage(Long id) {
+    }
+
     public int getId() {
         return id;
     }

@@ -1,4 +1,6 @@
-package com.university.project.dto;
+package com.university.project.dto.garage;
+
+import java.time.LocalDate;
 
 public class ResponseGarageDTO {
     private int id;
@@ -16,6 +18,9 @@ public class ResponseGarageDTO {
         this.location = location;
         this.city = city;
         this.capacity = capacity;
+    }
+
+    public ResponseGarageDTO(int id, int id1, String carName, String serviceType, LocalDate scheduledDate, int id2, String garageName) {
     }
 
     public int getId() {

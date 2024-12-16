@@ -1,4 +1,6 @@
-package com.university.project.dto;
+package com.university.project.dto.car;
+
+import com.university.project.dto.garage.ResponseGarageDTO;
 
 import java.util.List;
 

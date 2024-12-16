@@ -1,7 +1,6 @@
 package com.university.project.service;
 
-import com.university.project.dto.ResponseGarageDTO;
-import com.university.project.model.Car;
+import com.university.project.dto.garage.ResponseGarageDTO;
 import com.university.project.model.Garage;
 
 import java.util.List;
