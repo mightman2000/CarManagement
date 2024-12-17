@@ -29,8 +29,6 @@ public class CarServiceImpl implements CarService{
         garageRepository = theGarageRepository;
     }
 
-
-
     public List<ResponseCarDTO> getAllCars() {
         List<Car> cars = carRepository.findAll(); // Fetch all cars
         return cars.stream()

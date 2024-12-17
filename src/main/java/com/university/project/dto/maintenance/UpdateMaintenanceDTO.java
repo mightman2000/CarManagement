@@ -1,35 +1,20 @@
 package com.university.project.dto.maintenance;
 
-public class ResponseMaintenanceDTO {
+public class UpdateMaintenanceDTO {
 
-    private int id;
     private int carId;
-    private String carName;
     private String serviceType;
     private String scheduledDate;
     private int garageId;
-    private String garageName;
 
-
-    public ResponseMaintenanceDTO() {
+    public UpdateMaintenanceDTO() {
     }
 
-    public ResponseMaintenanceDTO(int id, int carId, String carName, String serviceType, String scheduledDate, int garageId, String garageName) {
-        this.id = id;
+    public UpdateMaintenanceDTO(int carId, String serviceType, String scheduledDate, int garageId) {
         this.carId = carId;
-        this.carName = carName;
         this.serviceType = serviceType;
         this.scheduledDate = scheduledDate;
         this.garageId = garageId;
-        this.garageName = garageName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getCarId() {
@@ -38,14 +23,6 @@ public class ResponseMaintenanceDTO {
 
     public void setCarId(int carId) {
         this.carId = carId;
-    }
-
-    public String getCarName() {
-        return carName;
-    }
-
-    public void setCarName(String carName) {
-        this.carName = carName;
     }
 
     public String getServiceType() {
@@ -60,7 +37,7 @@ public class ResponseMaintenanceDTO {
         return scheduledDate;
     }
 
-    public void setScheduledDate(String scheduleDate) {
+    public void setScheduledDate(String scheduledDate) {
         this.scheduledDate = scheduledDate;
     }
 
@@ -70,13 +47,5 @@ public class ResponseMaintenanceDTO {
 
     public void setGarageId(int garageId) {
         this.garageId = garageId;
-    }
-
-    public String getGarageName() {
-        return garageName;
-    }
-
-    public void setGarageName(String garageName) {
-        this.garageName = garageName;
     }
 }

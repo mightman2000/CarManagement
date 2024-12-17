@@ -1,8 +1,12 @@
 package com.university.project.service;
 
+import com.university.project.dto.garage.CreateGarageDto;
 import com.university.project.dto.garage.ResponseGarageDTO;
+import com.university.project.dto.garage.UpdateGarageDTO;
+import com.university.project.model.Car;
 import com.university.project.model.Garage;
 import com.university.project.repository.GarageRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,4 +66,35 @@ public class GarageServiceImpl implements GarageService{
     public void deleteById(int theId) {
         garageRepository.deleteById(theId);
     }
+
+
+    @Override
+    public Garage saveGarage(CreateGarageDto createGarageDto) {
+        Garage garage = new Garage();
+        garage.setName(createGarageDto.getName());
+        garage.setLocation(createGarageDto.getLocation());
+        garage.setCity(createGarageDto.getCity());
+        garage.setCapacity(createGarageDto.getCapacity());
+
+        return garageRepository.save(garage);
+    }
+
+    @Override
+    public Garage updateGarage(int id, UpdateGarageDTO updateGarageDTO) {
+        Optional<Garage> optionalGarage = garageRepository.findById(id);
+
+        if (optionalGarage.isPresent()) {
+            Garage garage = optionalGarage.get();
+
+            if (updateGarageDTO.getName() != null) garage.setName(updateGarageDTO.getName());
+            if (updateGarageDTO.getLocation() != null) garage.setLocation(updateGarageDTO.getLocation());
+            if (updateGarageDTO.getCapacity() != 0) garage.setCapacity(updateGarageDTO.getCapacity());
+            if (updateGarageDTO.getCity() != null) garage.setCity(updateGarageDTO.getCity());
+
+            return garageRepository.save(garage);
+        } else {
+            throw new EntityNotFoundException("Garage with id " + id + " not found");
+        }
+    }
+
 }

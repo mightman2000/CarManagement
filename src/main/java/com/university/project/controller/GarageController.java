@@ -1,13 +1,13 @@
 package com.university.project.controller;
 
+import com.university.project.dto.car.UpdateCarDTO;
+import com.university.project.dto.garage.CreateGarageDto;
 import com.university.project.dto.garage.ResponseGarageDTO;
+import com.university.project.dto.garage.UpdateGarageDTO;
 import com.university.project.model.Garage;
 import com.university.project.service.GarageService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +33,20 @@ public class GarageController {
         return ResponseEntity.ok(garages);
     }
 
+    @PostMapping
+    public Garage addGarage(@RequestBody CreateGarageDto createGarageDto){
+
+       return garageService.saveGarage(createGarageDto);
+    }
+
+    @PutMapping ("/{id}")
+    public Garage updateGarage(@PathVariable int id, @RequestBody UpdateGarageDTO updateGarageDTO){
+         return garageService.updateGarage(id, updateGarageDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public void removeGarage(@PathVariable int id){
+        garageService.deleteById(id);
+    }
 
 }

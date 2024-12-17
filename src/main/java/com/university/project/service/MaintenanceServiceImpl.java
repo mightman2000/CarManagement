@@ -1,22 +1,35 @@
 package com.university.project.service;
 
+import com.university.project.dto.garage.UpdateGarageDTO;
+import com.university.project.dto.maintenance.CreateMaintenanceDTO;
 import com.university.project.dto.maintenance.ResponseMaintenanceDTO;
+import com.university.project.dto.maintenance.UpdateMaintenanceDTO;
+import com.university.project.model.Car;
+import com.university.project.model.Garage;
 import com.university.project.model.Maintenance;
+import com.university.project.repository.CarRepository;
+import com.university.project.repository.GarageRepository;
 import com.university.project.repository.MaintenanceRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class MaintenanceServiceImpl implements MaintenanceService{
 
     private MaintenanceRepository maintenanceRepository;
+    private GarageRepository garageRepository;
+    private CarRepository carRepository;
 
     @Autowired
-    public MaintenanceServiceImpl(MaintenanceRepository theMaintenanceRepository) {
+    public MaintenanceServiceImpl(MaintenanceRepository theMaintenanceRepository, GarageRepository theGarageRepository, CarRepository theCarRepository) {
         maintenanceRepository = theMaintenanceRepository;
+        garageRepository = theGarageRepository;
+        carRepository = theCarRepository;
     }
 
     public List<ResponseMaintenanceDTO> findAllMaintenances() {
@@ -37,6 +50,67 @@ public class MaintenanceServiceImpl implements MaintenanceService{
                 maintenance.getGarageName()
         );
     }
+    @Override
+    public Maintenance saveMaintenance(CreateMaintenanceDTO createMaintenanceDTO) {
+        // Find the related Garage entity
+        Optional<Garage> optionalGarage = garageRepository.findById(createMaintenanceDTO.getGarageId());
+        if (!optionalGarage.isPresent()) {
+            throw new EntityNotFoundException("Garage with ID " + createMaintenanceDTO.getGarageId() + " not found");
+        }
 
+        // Find the related Car entity
+        Optional<Car> optionalCar = carRepository.findById(createMaintenanceDTO.getCarId());
+        if (!optionalCar.isPresent()) {
+            throw new EntityNotFoundException("Car with ID " + createMaintenanceDTO.getCarId() + " not found");
+        }
+
+        // Map DTO to Entity
+        Maintenance maintenance = new Maintenance();
+        maintenance.setGarage(optionalGarage.get());
+        maintenance.setCar(optionalCar.get());
+        maintenance.setServiceType(createMaintenanceDTO.getServiceType());
+
+        // Parse and set the scheduled date
+        maintenance.setScheduledDate(createMaintenanceDTO.getScheduledDate());
+
+        // Save to database
+        return maintenanceRepository.save(maintenance);
+    }
+
+    @Override
+    public Maintenance updateMaintenance(int id, UpdateMaintenanceDTO updateMaintenanceDTO) {
+        Optional<Maintenance> optionalMaintenance = maintenanceRepository.findById(id);
+
+        if (optionalMaintenance.isPresent()) {
+            Maintenance maintenance = optionalMaintenance.get();
+
+            if (updateMaintenanceDTO.getServiceType() != null) maintenance.setServiceType(updateMaintenanceDTO.getServiceType());
+            if (updateMaintenanceDTO.getScheduledDate() != null) maintenance.setScheduledDate(updateMaintenanceDTO.getScheduledDate());
+
+            // Fetch and set Garage and Car if IDs are provided
+            if (updateMaintenanceDTO.getGarageId() != 0) {
+                Optional<Garage> garageOpt = garageRepository.findById(updateMaintenanceDTO.getGarageId());
+                if (garageOpt.isPresent()) {
+                    maintenance.setGarage(garageOpt.get());
+                }
+            }
+
+            if (updateMaintenanceDTO.getCarId() != 0) {
+                Optional<Car> carOpt = carRepository.findById(updateMaintenanceDTO.getCarId());
+                if (carOpt.isPresent()) {
+                    maintenance.setCar(carOpt.get());
+                }
+            }
+
+            return maintenanceRepository.save(maintenance);
+        } else {
+            throw new RuntimeException("Maintenance not found with id: " + id);
+        }
+    }
+
+    @Override
+    public void deleteById(int theId) {
+        maintenanceRepository.deleteById(theId);
+    }
 
 }

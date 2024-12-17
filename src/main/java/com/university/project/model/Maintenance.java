@@ -21,16 +21,13 @@ public class Maintenance {
 
     private String garageName;
 
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "car_id", nullable = false)
     private Car car;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "garage_id", nullable = false)
     private Garage garage;
-
-
 
     public int getId() {
         return id;
