@@ -1,5 +1,6 @@
 package com.university.project.service;
 
+import com.university.project.dto.car.ResponseCarDTO;
 import com.university.project.dto.garage.CreateGarageDto;
 import com.university.project.dto.garage.ResponseGarageDTO;
 import com.university.project.dto.garage.UpdateGarageDTO;
@@ -95,6 +96,13 @@ public class GarageServiceImpl implements GarageService{
         } else {
             throw new EntityNotFoundException("Garage with id " + id + " not found");
         }
+    }
+
+    public List<ResponseGarageDTO> findGarageByCity(String city) {
+        List<Garage> garage = garageRepository.findByCityContainingIgnoreCase(city); // Fetch cars by make
+        return garage.stream()
+                .map(this::convertToDTO) // Convert each car to DTO
+                .collect(Collectors.toList());
     }
 
 }

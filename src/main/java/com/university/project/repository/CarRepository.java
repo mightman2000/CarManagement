@@ -15,6 +15,6 @@ public interface CarRepository extends JpaRepository<Car,Integer> {
 
     List<Car> findByProductionYearGreaterThanEqual(int fromYear);
 
-    List<Car> findByProductionYearLessThanEqual(Integer toYear);
+    List<Car> findByProductionYearLessThanEqual(int toYear);
 
 }

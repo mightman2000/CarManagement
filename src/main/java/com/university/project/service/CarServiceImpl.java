@@ -150,15 +150,14 @@ public class CarServiceImpl implements CarService{
                 .collect(Collectors.toList());
     }
 
-    public List<ResponseCarDTO> findCarByToYear(int fromYear){
+    public List<ResponseCarDTO> findCarByToYear(int toYear){
 
-        List<Car> cars = carRepository.findByProductionYearLessThanEqual(fromYear);
+        List<Car> cars = carRepository.findByProductionYearLessThanEqual(toYear);
 
         return cars.stream()
                 .map(this::convertToCarDTO) // Convert each car to DTO
                 .collect(Collectors.toList());
     }
-
 
 }
 

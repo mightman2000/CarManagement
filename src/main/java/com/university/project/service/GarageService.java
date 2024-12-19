@@ -23,4 +23,6 @@ public interface GarageService {
     Garage save(Garage theGarage);
 
     void deleteById(int theId);
+
+    public List<ResponseGarageDTO> findGarageByCity(String city);
 }
