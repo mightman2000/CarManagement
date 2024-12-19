@@ -123,6 +123,43 @@ public class CarServiceImpl implements CarService{
             throw new RuntimeException("Car not found");
         }
     }
+
+    public List<ResponseCarDTO> findCarsByMake(String make) {
+        List<Car> cars = carRepository.findByMakeContainingIgnoreCase(make); // Fetch cars by make
+        return cars.stream()
+                .map(this::convertToCarDTO) // Convert each car to DTO
+                .collect(Collectors.toList());
+    }
+
+
+    public List<ResponseCarDTO> findCarByGarageId(int garageId){
+
+        List<Car> cars = carRepository.findByGarageId(garageId);
+
+        return cars.stream()
+                .map(this::convertToCarDTO) // Convert each car to DTO
+                .collect(Collectors.toList());
+    }
+
+    public List<ResponseCarDTO> findCarByFromYear(int fromYear){
+
+        List<Car> cars = carRepository.findByProductionYearGreaterThanEqual(fromYear);
+
+        return cars.stream()
+                .map(this::convertToCarDTO) // Convert each car to DTO
+                .collect(Collectors.toList());
+    }
+
+    public List<ResponseCarDTO> findCarByToYear(int fromYear){
+
+        List<Car> cars = carRepository.findByProductionYearLessThanEqual(fromYear);
+
+        return cars.stream()
+                .map(this::convertToCarDTO) // Convert each car to DTO
+                .collect(Collectors.toList());
+    }
+
+
 }
 
 
