@@ -1,10 +1,8 @@
-package com.university.project.service;
+package com.university.project.service.garage;
 
-import com.university.project.dto.car.ResponseCarDTO;
 import com.university.project.dto.garage.CreateGarageDto;
 import com.university.project.dto.garage.ResponseGarageDTO;
 import com.university.project.dto.garage.UpdateGarageDTO;
-import com.university.project.model.Car;
 import com.university.project.model.Garage;
 import com.university.project.repository.GarageRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class GarageServiceImpl implements GarageService{
+public class GarageServiceImpl implements GarageService {
 
     private GarageRepository garageRepository;
 

@@ -1,12 +1,10 @@
 package com.university.project.controller;
 
-import com.university.project.dto.car.UpdateCarDTO;
 import com.university.project.dto.garage.CreateGarageDto;
 import com.university.project.dto.garage.ResponseGarageDTO;
 import com.university.project.dto.garage.UpdateGarageDTO;
 import com.university.project.model.Garage;
-import com.university.project.service.GarageService;
-import org.springframework.http.ResponseEntity;
+import com.university.project.service.garage.GarageService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,11 +25,11 @@ public class GarageController {
         return garageService.findById(id);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ResponseGarageDTO>> getAllGarages() {
-        List<ResponseGarageDTO> garages = garageService.getAllGarages();
-        return ResponseEntity.ok(garages);
-    }
+    //@GetMapping
+    //public ResponseEntity<List<ResponseGarageDTO>> getAllGarages() {
+    //    List<ResponseGarageDTO> garages = garageService.getAllGarages();
+    //    return ResponseEntity.ok(garages);
+    //}
 
     @PostMapping
     public Garage addGarage(@RequestBody CreateGarageDto createGarageDto){
@@ -49,5 +47,15 @@ public class GarageController {
         garageService.deleteById(id);
     }
 
+    @GetMapping
+    public List<ResponseGarageDTO> getAllGarages(@RequestParam(required = false, name = "city") String city) {
+
+        if (city != null && !city.isEmpty()) {
+            return garageService.findGarageByCity(city);
+        }
+
+        return garageService.getAllGarages();
+
+    }
 
 }

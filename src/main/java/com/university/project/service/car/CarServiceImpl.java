@@ -1,4 +1,4 @@
-package com.university.project.service;
+package com.university.project.service.car;
 
 import com.university.project.dto.car.CreateCarDTO;
 import com.university.project.dto.car.ResponseCarDTO;
@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CarServiceImpl implements CarService{
+public class CarServiceImpl implements CarService {
 
     private CarRepository carRepository;
     private GarageRepository garageRepository;

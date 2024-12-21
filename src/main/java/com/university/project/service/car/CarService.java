@@ -1,4 +1,4 @@
-package com.university.project.service;
+package com.university.project.service.car;
 
 import com.university.project.dto.car.CreateCarDTO;
 import com.university.project.dto.car.ResponseCarDTO;

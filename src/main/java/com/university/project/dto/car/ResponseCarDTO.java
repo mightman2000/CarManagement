@@ -3,6 +3,7 @@ package com.university.project.dto.car;
 import com.university.project.dto.garage.ResponseGarageDTO;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ResponseCarDTO {
 
@@ -71,5 +72,18 @@ public class ResponseCarDTO {
 
     public void setGarages(List<ResponseGarageDTO> garages) {
         this.garages = garages;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ResponseCarDTO that = (ResponseCarDTO) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

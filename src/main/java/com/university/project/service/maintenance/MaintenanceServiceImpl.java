@@ -1,6 +1,6 @@
-package com.university.project.service;
+package com.university.project.service.maintenance;
 
-import com.university.project.dto.garage.UpdateGarageDTO;
+import com.university.project.dto.car.ResponseCarDTO;
 import com.university.project.dto.maintenance.CreateMaintenanceDTO;
 import com.university.project.dto.maintenance.ResponseMaintenanceDTO;
 import com.university.project.dto.maintenance.UpdateMaintenanceDTO;
@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class MaintenanceServiceImpl implements MaintenanceService{
+public class MaintenanceServiceImpl implements MaintenanceService {
 
     private MaintenanceRepository maintenanceRepository;
     private GarageRepository garageRepository;
@@ -111,6 +111,25 @@ public class MaintenanceServiceImpl implements MaintenanceService{
     @Override
     public void deleteById(int theId) {
         maintenanceRepository.deleteById(theId);
+    }
+
+    public List<ResponseMaintenanceDTO> findMaintenanceByGarageId(int garageId){
+
+        List<Maintenance> maintenances = maintenanceRepository.findByGarageId(garageId);
+
+        return maintenances.stream()
+                .map(this::convertToDTO) // Convert each car to DTO
+                .collect(Collectors.toList());
+    }
+
+
+    public List<ResponseMaintenanceDTO> findMaintenanceByCarId(int carId){
+
+        List<Maintenance> maintenances = maintenanceRepository.findByCarId(carId);
+
+        return maintenances.stream()
+                .map(this::convertToDTO) // Convert each car to DTO
+                .collect(Collectors.toList());
     }
 
 }

@@ -1,11 +1,8 @@
-package com.university.project.service;
+package com.university.project.service.garage;
 
-import com.university.project.dto.car.CreateCarDTO;
-import com.university.project.dto.car.UpdateCarDTO;
 import com.university.project.dto.garage.CreateGarageDto;
 import com.university.project.dto.garage.ResponseGarageDTO;
 import com.university.project.dto.garage.UpdateGarageDTO;
-import com.university.project.model.Car;
 import com.university.project.model.Garage;
 
 import java.util.List;

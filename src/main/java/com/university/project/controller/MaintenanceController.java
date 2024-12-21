@@ -4,7 +4,7 @@ import com.university.project.dto.maintenance.CreateMaintenanceDTO;
 import com.university.project.dto.maintenance.ResponseMaintenanceDTO;
 import com.university.project.dto.maintenance.UpdateMaintenanceDTO;
 import com.university.project.model.Maintenance;
-import com.university.project.service.MaintenanceService;
+import com.university.project.service.maintenance.MaintenanceService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,10 +19,10 @@ public class MaintenanceController {
         this.maintenanceService = maintenanceService;
     }
 
-    @GetMapping
-    public List<ResponseMaintenanceDTO> getAllMaintenances(){
-         return maintenanceService.findAllMaintenances();
-        }
+    //@GetMapping
+    //public List<ResponseMaintenanceDTO> getAllMaintenances(){
+    //     return maintenanceService.findAllMaintenances();
+    //    }
 
     @PostMapping
     public Maintenance addMaintenance(@RequestBody CreateMaintenanceDTO createMaintenanceDTO){
@@ -42,5 +42,24 @@ public class MaintenanceController {
     public void removeMaintenance(@PathVariable int id){
         maintenanceService.deleteById(id);
     }
+
+    @GetMapping
+    public List<ResponseMaintenanceDTO> getAllMaintenances(@RequestParam(required = false, name = "garageId") Integer garageId,
+                                                           @RequestParam(required = false, name = "carId") Integer carId){
+
+        if (garageId != null && garageId != 0) {
+            return maintenanceService.findMaintenanceByGarageId(garageId);
+        }
+
+        if(carId !=null && carId !=0){
+            return maintenanceService.findMaintenanceByCarId(carId);
+        }
+
+
+
+        return maintenanceService.findAllMaintenances();
+    }
+
+
 
 }
