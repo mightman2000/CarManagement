@@ -1,5 +1,9 @@
 package com.university.project.dto.maintenance;
 
+import com.university.project.dto.car.ResponseCarDTO;
+
+import java.util.Objects;
+
 public class ResponseMaintenanceDTO {
 
     private int id;
@@ -78,5 +82,19 @@ public class ResponseMaintenanceDTO {
 
     public void setGarageName(String garageName) {
         this.garageName = garageName;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ResponseMaintenanceDTO that = (ResponseMaintenanceDTO) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

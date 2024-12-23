@@ -3,6 +3,7 @@ package com.university.project.service.garage;
 import com.university.project.dto.garage.CreateGarageDto;
 import com.university.project.dto.garage.ResponseGarageDTO;
 import com.university.project.dto.garage.UpdateGarageDTO;
+import com.university.project.dto.report.GarageDailyAvailabilityReportDTO;
 import com.university.project.model.Garage;
 
 import java.util.List;

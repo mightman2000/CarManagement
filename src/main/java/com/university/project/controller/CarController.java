@@ -67,12 +67,12 @@ public class CarController {
            cars.retainAll(filteredCars);
        }
 
-       if (fromYear !=null && fromYear >= 0 ) {
+       if (fromYear != null && fromYear >= 0 ) {
            List<ResponseCarDTO> filteredCars = carService.findCarByFromYear(fromYear);
            cars.retainAll(filteredCars);
        }
 
-       if (toYear !=null && toYear > 0 ) {
+       if (toYear != null && toYear > 0 ) {
            List<ResponseCarDTO> filteredCars = carService.findCarByToYear(toYear);
            cars.retainAll(filteredCars);
        }

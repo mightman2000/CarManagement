@@ -3,6 +3,8 @@ package com.university.project.controller;
 import com.university.project.dto.maintenance.CreateMaintenanceDTO;
 import com.university.project.dto.maintenance.ResponseMaintenanceDTO;
 import com.university.project.dto.maintenance.UpdateMaintenanceDTO;
+import com.university.project.dto.report.GarageDailyAvailabilityReportDTO;
+import com.university.project.model.Garage;
 import com.university.project.model.Maintenance;
 import com.university.project.service.maintenance.MaintenanceService;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +33,6 @@ public class MaintenanceController {
 
     }
 
-
     @PutMapping("/{id}")
     Maintenance updateMaintenance(@PathVariable int id, @RequestBody UpdateMaintenanceDTO updateMaintenanceDTO){
 
@@ -46,18 +47,20 @@ public class MaintenanceController {
     @GetMapping
     public List<ResponseMaintenanceDTO> getAllMaintenances(@RequestParam(required = false, name = "garageId") Integer garageId,
                                                            @RequestParam(required = false, name = "carId") Integer carId){
+        // add intersection to be able to apply 2 or more filters at once
+        List<ResponseMaintenanceDTO> maintenances= maintenanceService.findAllMaintenances();
 
         if (garageId != null && garageId != 0) {
-            return maintenanceService.findMaintenanceByGarageId(garageId);
+            List<ResponseMaintenanceDTO> filterMaintenances = maintenanceService.findMaintenanceByGarageId(garageId);
+            maintenances.retainAll(filterMaintenances);
         }
 
-        if(carId !=null && carId !=0){
-            return maintenanceService.findMaintenanceByCarId(carId);
+        if(carId != null && carId != 0){
+            List<ResponseMaintenanceDTO> filterMaintenances = maintenanceService.findMaintenanceByCarId(carId);
+            maintenances.retainAll(filterMaintenances);
         }
 
-
-
-        return maintenanceService.findAllMaintenances();
+        return maintenances;
     }
 
 
