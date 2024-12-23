@@ -21,6 +21,7 @@ public interface MaintenanceService {
 
     public List<ResponseMaintenanceDTO> findMaintenanceByCarId(int carId);
 
+    public List<ResponseMaintenanceDTO> findMaintenanceBetweenDate(String startDate, String endDate);
 
 
 }

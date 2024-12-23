@@ -14,5 +14,6 @@ public interface MaintenanceRepository extends JpaRepository<Maintenance, Intege
 
     List<Maintenance> findByCarId(int carId);
 
+    List<Maintenance> findByScheduledDateBetween(String startDate, String endDate);
 
 }

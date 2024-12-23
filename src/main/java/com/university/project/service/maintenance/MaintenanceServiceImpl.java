@@ -132,4 +132,15 @@ public class MaintenanceServiceImpl implements MaintenanceService {
                 .collect(Collectors.toList());
     }
 
+    public List<ResponseMaintenanceDTO> findMaintenanceBetweenDate(String startDate, String endDate){
+
+        List<Maintenance> maintenances = maintenanceRepository.findByScheduledDateBetween(startDate,endDate);
+
+        return maintenances.stream()
+                .map(this::convertToDTO) // Convert each car to DTO
+                .collect(Collectors.toList());
+
+    }
+
+
 }

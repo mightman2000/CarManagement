@@ -26,12 +26,6 @@ public class GarageController {
         return garageService.findById(id);
     }
 
-    //@GetMapping
-    //public ResponseEntity<List<ResponseGarageDTO>> getAllGarages() {
-    //    List<ResponseGarageDTO> garages = garageService.getAllGarages();
-    //    return ResponseEntity.ok(garages);
-    //}
-
     @PostMapping
     public Garage addGarage(@RequestBody CreateGarageDto createGarageDto){
 

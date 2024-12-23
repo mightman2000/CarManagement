@@ -21,11 +21,6 @@ public class MaintenanceController {
         this.maintenanceService = maintenanceService;
     }
 
-    //@GetMapping
-    //public List<ResponseMaintenanceDTO> getAllMaintenances(){
-    //     return maintenanceService.findAllMaintenances();
-    //    }
-
     @PostMapping
     public Maintenance addMaintenance(@RequestBody CreateMaintenanceDTO createMaintenanceDTO){
 
@@ -46,8 +41,10 @@ public class MaintenanceController {
 
     @GetMapping
     public List<ResponseMaintenanceDTO> getAllMaintenances(@RequestParam(required = false, name = "garageId") Integer garageId,
-                                                           @RequestParam(required = false, name = "carId") Integer carId){
-        // add intersection to be able to apply 2 or more filters at once
+                                                           @RequestParam(required = false, name = "carId") Integer carId,
+                                                           @RequestParam(required = false, name = "carId") String startDate,
+                                                           @RequestParam(required = false, name = "carId") String endDate){
+
         List<ResponseMaintenanceDTO> maintenances= maintenanceService.findAllMaintenances();
 
         if (garageId != null && garageId != 0) {
@@ -58,6 +55,12 @@ public class MaintenanceController {
         if(carId != null && carId != 0){
             List<ResponseMaintenanceDTO> filterMaintenances = maintenanceService.findMaintenanceByCarId(carId);
             maintenances.retainAll(filterMaintenances);
+        }
+
+
+        if (startDate != null && endDate != null) {
+            List<ResponseMaintenanceDTO> filterMaintenances = maintenanceService.findMaintenanceBetweenDate(startDate, endDate);
+            maintenances.retainAll(filterMaintenances); // Retain only the ones within the date range
         }
 
         return maintenances;
