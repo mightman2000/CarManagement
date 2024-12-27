@@ -58,18 +58,15 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car findById(int theId) {
+    public List<ResponseCarDTO> findById(int theId) {
         Optional<Car> result = carRepository.findById(theId);
 
-        Car theCar = null;
+        Car theCar = result.orElseThrow(() ->
+                new RuntimeException("Did not find car with id - " + theId)
+        );
 
-        if (result.isPresent()) {
-            theCar = result.get();
-        } else {
-            throw new RuntimeException("Did not find car with id - " + theId);
-        }
-
-        return theCar;
+        // Convert the single Car object to a List of one DTO
+        return List.of(convertToCarDTO(theCar));
     }
 
     @Override

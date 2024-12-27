@@ -113,6 +113,17 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         maintenanceRepository.deleteById(theId);
     }
 
+    @Override
+    public List<ResponseMaintenanceDTO> findById(int theId) {
+
+    Optional<Maintenance> result = maintenanceRepository.findById(theId);
+
+    Maintenance theMaintenance = result.orElseThrow(() ->
+            new RuntimeException("Did not find maintenance with id - " + theId)
+    );
+        return List.of(convertToDTO(theMaintenance));
+    }
+
     public List<ResponseMaintenanceDTO> findMaintenanceByGarageId(int garageId){
 
         List<Maintenance> maintenances = maintenanceRepository.findByGarageId(garageId);

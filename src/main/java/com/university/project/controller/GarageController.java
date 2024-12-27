@@ -21,7 +21,7 @@ public class GarageController {
     }
 
     @GetMapping("/{id}")
-    public Garage getGarageById(@PathVariable int id){
+    public List<ResponseGarageDTO> getGarageById(@PathVariable int id){
 
         return garageService.findById(id);
     }

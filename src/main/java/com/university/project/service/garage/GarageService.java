@@ -10,17 +10,17 @@ import java.util.List;
 
 public interface GarageService {
 
-    public Garage updateGarage(int id, UpdateGarageDTO updateGarageDTO);
+    Garage updateGarage(int id, UpdateGarageDTO updateGarageDTO);
 
-    public Garage saveGarage(CreateGarageDto createGarageDto);
+    Garage saveGarage(CreateGarageDto createGarageDto);
 
-    public List<ResponseGarageDTO> getAllGarages();
+    List<ResponseGarageDTO> getAllGarages();
 
-    Garage findById(int theId);
+    List<ResponseGarageDTO> findById(int theId);
 
     Garage save(Garage theGarage);
 
     void deleteById(int theId);
 
-    public List<ResponseGarageDTO> findGarageByCity(String city);
+    List<ResponseGarageDTO> findGarageByCity(String city);
 }

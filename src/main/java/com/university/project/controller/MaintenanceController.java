@@ -28,8 +28,13 @@ public class MaintenanceController {
 
     }
 
+    @GetMapping("/{id}")
+    public List<ResponseMaintenanceDTO> getMaintenanceById(@PathVariable int id){
+        return maintenanceService.findById(id);
+    }
+
     @PutMapping("/{id}")
-    Maintenance updateMaintenance(@PathVariable int id, @RequestBody UpdateMaintenanceDTO updateMaintenanceDTO){
+    public Maintenance updateMaintenance(@PathVariable int id, @RequestBody UpdateMaintenanceDTO updateMaintenanceDTO){
 
         return maintenanceService.updateMaintenance(id, updateMaintenanceDTO);
     }

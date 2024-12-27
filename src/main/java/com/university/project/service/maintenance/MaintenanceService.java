@@ -9,19 +9,21 @@ import java.util.List;
 
 public interface MaintenanceService {
 
-    public List<ResponseMaintenanceDTO> findAllMaintenances();
+    List<ResponseMaintenanceDTO> findAllMaintenances();
 
-    public Maintenance saveMaintenance(CreateMaintenanceDTO createMaintenanceDTO);
+    Maintenance saveMaintenance(CreateMaintenanceDTO createMaintenanceDTO);
 
-    public Maintenance updateMaintenance(int id, UpdateMaintenanceDTO updateMaintenanceDTO);
+    Maintenance updateMaintenance(int id, UpdateMaintenanceDTO updateMaintenanceDTO);
 
     void deleteById(int theId);
 
-    public List<ResponseMaintenanceDTO> findMaintenanceByGarageId(int garageId);
+    List<ResponseMaintenanceDTO> findById(int theId);
 
-    public List<ResponseMaintenanceDTO> findMaintenanceByCarId(int carId);
+    List<ResponseMaintenanceDTO> findMaintenanceByGarageId(int garageId);
 
-    public List<ResponseMaintenanceDTO> findMaintenanceBetweenDate(String startDate, String endDate);
+    List<ResponseMaintenanceDTO> findMaintenanceByCarId(int carId);
+
+    List<ResponseMaintenanceDTO> findMaintenanceBetweenDate(String startDate, String endDate);
 
 
 }

@@ -9,26 +9,24 @@ import java.util.List;
 
 public interface CarService {
 
-    public Car saveCar(CreateCarDTO createCarDTO);
+    Car saveCar(CreateCarDTO createCarDTO);
 
-   // public List<ResponseCarDTO> getFilteredCars(String carMake, Integer garageId, Integer fromYear, Integer toYear);
+    List<ResponseCarDTO> getAllCars();
 
-    public List<ResponseCarDTO> getAllCars();
-
-    Car findById(int theId);
+    List<ResponseCarDTO> findById(int theId);
 
     Car save(Car theCar);
 
     void deleteById(int theId);
 
-    public Car updateCar(Integer id, UpdateCarDTO updateCarDTO);
+    Car updateCar(Integer id, UpdateCarDTO updateCarDTO);
 
-    public List<ResponseCarDTO> findCarsByMake(String make);
+    List<ResponseCarDTO> findCarsByMake(String make);
 
-    public List<ResponseCarDTO> findCarByGarageId(int garageId);
+    List<ResponseCarDTO> findCarByGarageId(int garageId);
 
-    public List<ResponseCarDTO> findCarByFromYear(int fromYear);
+    List<ResponseCarDTO> findCarByFromYear(int fromYear);
 
-    public List<ResponseCarDTO> findCarByToYear(int fromYear);
+    List<ResponseCarDTO> findCarByToYear(int fromYear);
 }
 

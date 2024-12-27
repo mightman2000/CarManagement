@@ -22,13 +22,8 @@ public class CarController {
         carService = theCarService;
     }
 
-    //@GetMapping
-    //public List<ResponseCarDTO> getAllCars() {
-    //    return carService.getAllCars();
-    //}
-
     @GetMapping("/{id}")
-    public Car getCarById(@PathVariable int id){
+    public List<ResponseCarDTO> getCarById(@PathVariable int id){
 
         return carService.findById(id);
     }

@@ -43,18 +43,14 @@ public class GarageServiceImpl implements GarageService {
     }
 
     @Override
-    public Garage findById(int theId) {
+    public List<ResponseGarageDTO> findById(int theId) {
         Optional<Garage> result = garageRepository.findById(theId);
 
-        Garage theGarage = null;
+        Garage theGarage= result.orElseThrow(() ->
+                new RuntimeException("Did not find garage with id - " + theId)
+        );
 
-        if (result.isPresent()) {
-            theGarage = result.get();
-        } else {
-            throw new RuntimeException("Did not find car with id - " + theId);
-        }
-
-        return theGarage;
+        return List.of(convertToDTO(theGarage));
     }
 
     @Override
