@@ -4,6 +4,7 @@ import com.university.project.dto.maintenance.CreateMaintenanceDTO;
 import com.university.project.dto.maintenance.ResponseMaintenanceDTO;
 import com.university.project.dto.maintenance.UpdateMaintenanceDTO;
 import com.university.project.dto.report.GarageDailyAvailabilityReportDTO;
+import com.university.project.dto.report.MonthlyRequestsReportDTO;
 import com.university.project.model.Garage;
 import com.university.project.model.Maintenance;
 import com.university.project.service.maintenance.MaintenanceService;
@@ -57,11 +58,10 @@ public class MaintenanceController {
             maintenances.retainAll(filterMaintenances);
         }
 
-        if(carId != null && carId != 0){
+        if (carId != null && carId != 0){
             List<ResponseMaintenanceDTO> filterMaintenances = maintenanceService.findMaintenanceByCarId(carId);
             maintenances.retainAll(filterMaintenances);
         }
-
 
         if (startDate != null && endDate != null) {
             List<ResponseMaintenanceDTO> filterMaintenances = maintenanceService.findMaintenanceBetweenDate(startDate, endDate);
@@ -71,6 +71,12 @@ public class MaintenanceController {
         return maintenances;
     }
 
-
-
+    //report
+    //@GetMapping("/monthlyRequestReport")
+    //public MonthlyRequestsReportDTO getReport(){
+    //
+    //
+    //
+    //
+    //}
 }
